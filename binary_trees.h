@@ -29,6 +29,6 @@ typedef struct binary_tree_s heap_t;
 /* Binary trees functions */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 
-
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
 
 #endif /* _BINARY_TREES_H_ */
