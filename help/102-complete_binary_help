@@ -1,0 +1,67 @@
+# Check if a binary tree is complete
+
+Compute the height of the tree
+
+Check the number of nodes of each level
+
+level 0: 1 node
+level 1: 2 nodes
+level 2: 4 nodes
+level 3: 8 nodes
+...
+level n: 2^n nodes
+
+If the height > level and some level does not follow the pattern, then the binary tree is not complete (Every level of a complete binary tree is completely filled, except possibly the last)
+
+For check the order of the nodes, assign numbers depending on the number of childs
+
+No childs:    0
+left-child:   1
+right-child: -1
+both-childs:  2
+
+Check every child of the nodes and using the above enumaration, determining if the actual tree is complete or not.
+
+Complete binary tree:
+	 		 			     A
+						____/ \____
+					 /           \
+					B			        C
+			  _/ \_         _/ \_
+			 /     \       /     \
+			D       E     F       G
+		 / \     / \   /
+		H   I   J   K L
+
+	 		 			     A
+						____/ \____
+					 /           \
+					B			        C
+			  _/ \_         _/ \_
+			 /     \       /     \
+			D       E     F       G
+		 / \     / \   / \
+		H   I   J   K L   M
+
+
+Not complete binary tree:
+
+	 		 			     A
+						____/ \____
+					 /           \
+					B			        C
+			  _/ \_         _/ \_
+			 /     \       /     \
+			D       E     F       G
+		 / \     / \     \
+		H   I   J   K     M
+
+	 		 			     A
+						____/ \____
+					 /           \
+					B			        C
+			  _/ \_         _/ \_
+			 /     \       /     \
+			D       E     F       G
+		 / \     / \					 / \
+		H   I   J   K  				N   O
