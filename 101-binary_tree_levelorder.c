@@ -1,9 +1,9 @@
 #include "binary_trees.h"
 
-void binary_tree_level(const binary_tree_t *tree, size_t depth, void (*func)(int));
+void binary_tree_level(const binary_tree_t *tree, size_t d, void (*func)(int));
 
 /**
- * binary_tree_levelorder - Goes trough a binary tree using levelorder traversal
+ * binary_tree_levelorder - Goes trough a bin-tree using levelorder traversal
  * @tree: Pointer node of the tree to traverse
  * @func: A pointer to a function to call for each node
  *
@@ -13,7 +13,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	size_t height, depth;
 
-	if (tree == NULL)
+	if (tree == NULL || func == NULL)
 		return;
 
 	height = binary_tree_height(tree);
@@ -50,24 +50,24 @@ size_t binary_tree_height(const binary_tree_t *tree)
 /**
  * binary_tree_level - Applies the function given to the node at the level
  * @tree: Pointer to the root of the tree
- * @depth: Level to apply the function
+ * @d: Level to apply the function
  * @func: Function to apply to the nodes at given level
  *
  * Return: Nothing
  */
-void binary_tree_level(const binary_tree_t *tree, size_t depth, void (*func)(int))
+void binary_tree_level(const binary_tree_t *tree, size_t d, void (*func)(int))
 {
 
 	if (tree == NULL)
 		return;
-	if (depth == 0)
+	if (d == 0)
 	{
 		func(tree->n);
 		return;
 	}
 	else
 	{
-		binary_tree_level(tree->left, depth - 1, func);
-		binary_tree_level(tree->right, depth - 1, func);
+		binary_tree_level(tree->left, d - 1, func);
+		binary_tree_level(tree->right, d - 1, func);
 	}
 }
