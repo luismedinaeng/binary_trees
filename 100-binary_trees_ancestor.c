@@ -35,10 +35,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	size_t len_f, len_s, i, j;
 
 	if (first == NULL || second == NULL)
-	{
-		printf("retorno Null\n");
 		return (NULL);
-	}
 	if (first == second->parent)
 		return (second->parent);
 	if (second == first->parent)
