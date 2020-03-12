@@ -31,7 +31,7 @@ size_t dist_to_root(binary_tree_t *node)
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 				     const binary_tree_t *second)
 {
-	binary_tree_t *tree_f, *tree_s, **array_f, **array_s, *common, *son;
+	binary_tree_t *tree_f, *tree_s, **array_f, **array_s, *common;
 	size_t len_f, len_s, i, j;
 
 	if (first == NULL || second == NULL)
@@ -40,13 +40,18 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		return (second->parent);
 	if (second == first->parent)
 		return (first->parent);
-	son = first->left;
-	if (first == second && first->parent == NULL)
-		return (son->parent);
-	else
+	if (first == second)
 		return (first->parent);
-	tree_f = first->parent;
-	tree_s = second->parent;
+	if (first->parent == NULL &&
+	    (first->left != NULL || first->right != NULL))
+		tree_f = first->left->parent;
+	else
+		tree_f = first->parent;
+	if (second->parent == NULL && (
+		    second->left != NULL || second->right != NULL))
+		tree_s = second->left->parent;
+	else
+		tree_s = second->parent;
 	len_f = dist_to_root(tree_f);
 	len_s = dist_to_root(tree_s);
 	array_f = malloc(len_f + 1 * (sizeof(binary_tree_t)));
