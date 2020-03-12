@@ -42,13 +42,12 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		return (first->parent);
 	if (first == second)
 		return (first->parent);
-	if (first->parent == NULL &&
-	    (first->left != NULL || first->right != NULL))
+	if (first->parent  == NULL && (first->left != NULL || first->right != NULL))
 		tree_f = first->left->parent;
 	else
 		tree_f = first->parent;
-	if (second->parent == NULL && (
-		    second->left != NULL || second->right != NULL))
+	if (second->parent == NULL &&
+	    (second->left != NULL || second->right != NULL))
 		tree_s = second->left->parent;
 	else
 		tree_s = second->parent;
@@ -79,5 +78,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 			}
 		}
 	}
+	free(array_f);
+	free(array_s);
 	return (NULL);
 }
