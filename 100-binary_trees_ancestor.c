@@ -1,5 +1,26 @@
 #include "binary_trees.h"
 
+
+/**
+ *dist_to_root - calc the distance of a node to the root
+ *@node: node to check
+ *
+ *Return: size_t of the distance of the node to the root
+ */
+size_t dist_to_root(binary_tree_t *node)
+{
+	size_t len;
+
+	len = 0;
+	while (node != NULL)
+	{
+		node = node->parent;
+		len++;
+	}
+	return (len);
+}
+
+
 /**
  *binary_trees_ancestor - finds the lowest common ancestor of two nodes
  *@first: first node
@@ -12,7 +33,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 {
 	binary_tree_t *tree_f, *tree_s, **array_f, **array_s, *common;
 	size_t len_f, len_s, i, j;
-	int common_find;
 
 	if (first == second->parent)
 		return (second->parent);
@@ -20,24 +40,10 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		return (first->parent);
 	if (first == second)
 		return (first->parent);
-
 	tree_f = first->parent;
 	tree_s = second->parent;
-	len_f = len_s = 0;
-	common_find = 0;
-	while (tree_f != NULL)
-	{
-		tree_f = tree_f->parent;
-		len_f++;
-	}
-	while (tree_s != NULL)
-	{
-		tree_s = tree_s->parent;
-		len_s++;
-	}
-	tree_f = first->parent;
-	tree_s = second->parent;
-
+	len_f = dist_to_root(tree_f);
+	len_s = dist_to_root(tree_s);
 	array_f = malloc(len_f + 1 * (sizeof(binary_tree_t)));
 	array_s = malloc(len_s + 1 * (sizeof(binary_tree_t)));
 	for (i = 0; i < len_f; i++)
@@ -50,7 +56,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		array_s[i] = tree_s;
 		tree_s = tree_s->parent;
 	}
-
 	for (i = 0; i < len_f; i++)
 	{
 		for (j = 0; j < len_s; j++)
@@ -58,14 +63,11 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 			if (array_f[i] == array_s[j])
 			{
 				common = array_f[i];
-				common_find = 1;
-				break;
+				free(array_f);
+				free(array_s);
+				return (common);
 			}
 		}
-		if (common_find == 1)
-			break;
 	}
-	free(array_f);
-	free(array_s);
-	return (common);
+	return (NULL);
 }
