@@ -34,6 +34,8 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	binary_tree_t *tree_f, *tree_s, **array_f, **array_s, *common;
 	size_t len_f, len_s, i, j;
 
+	if (first == NULL || second == NULL)
+		return (NULL);
 	if (first == second->parent)
 		return (second->parent);
 	if (second == first->parent)
